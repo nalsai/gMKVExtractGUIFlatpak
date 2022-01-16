@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=gMKVExtractGUI
+GenericName=Subtitle Editor
+Comment=A small GUI utility to use mkvinfo and mkvextract cli tools from MKVToolnix pack, in order to extract tracks, chapters and CUE sheets from mkv files. 
+Exec=gMKVExtractGUI %U
+Icon=net.sourceforge.gMKVExtractGUI
+Terminal=false
+Categories=AudioVideo;
+Keywords=subtitles;subtitle;video;audio;
+MimeType=video/x-matroska-3d;video/x-matroska;audio/x-matroska;video/webm;audio/webm;
