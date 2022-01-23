@@ -42,5 +42,5 @@ flatpak-builder --repo=repo --force-clean build-dir net.sourceforge.gMKVExtractG
 ### Make single-file bundle from repo
 
 ```bash
-flatpak build-bundle repo gMKVExtractGUI.flatpak net.sourceforge.gMKVExtractGUI.yml stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
+flatpak build-bundle repo gMKVExtractGUI.flatpak net.sourceforge.gMKVExtractGUI stable --runtime-repo="https://flathub.org/repo/flathub.flatpakrepo"
 ```
