@@ -1,24 +1,26 @@
 app-id: net.sourceforge.gMKVExtractGUI
-runtime: org.kde.Platform # KDE is needed for MKVToolNix
-runtime-version: "5.15"
+runtime: org.kde.Platform  # KDE is needed for MKVToolNix
+runtime-version: "6.2"
 sdk: org.kde.Sdk
 command: gMKVExtractGUI
-branch: stable
+default-branch: stable
 add-extensions:
   org.freedesktop.Sdk.Extension.mono6:
     directory: lib/mono6
     add-ld-path: .
-    version: "20.08"
+    version: "21.08"
     autodownload: true
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/mono6
 cleanup:
   - /include
-  - /lib/*.a
-  - /lib/*.la
   - /lib/cmake
   - /lib/pkgconfig
   - /share/man
+  - /bin/cmark
+  - /gems
+  - '*.a'
+  - '*.la'
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -31,6 +33,21 @@ modules:
     - type: git
       url: https://github.com/mono/libgdiplus
       branch: "6.1"
+
+  - name: drake
+    buildsystem: simple
+    build-commands:
+      - mkdir /app/gems
+      - GEM_HOME=/app/gems gem install comp_tree-1.1.3.gem
+      - GEM_HOME=/app/gems gem install drake-0.9.2.0.3.1.gem
+    sources:
+      - type: file
+        url: https://rubygems.org/downloads/comp_tree-1.1.3.gem
+        sha256: a9260f397f42e36de62764a8fe7e68bdbbcc75674d0419e831f633d6dda44936
+      - type: file
+        url: https://rubygems.org/downloads/drake-0.9.2.0.3.1.gem
+        sha256: 4f7983a69720d6cc3427a137b31b0737b63033d96d80d8dbb4ad360e75abf325
+
   - name: boost
     buildsystem: simple
     build-commands:
@@ -38,8 +55,9 @@ modules:
       - cp -R boost /app/include
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.bz2
-        sha256: fc9f85fc030e233142908241af7a846e60630aa7388de9a5fafb1f3a26840854
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
+        sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
+
   - name: cmark
     buildsystem: cmake-ninja
     builddir: true
@@ -52,6 +70,7 @@ modules:
       - type: archive
         url: https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
         sha256: 6c7d2bcaea1433d977d8fed0b55b71c9d045a7cdf616e3cd2dce9007da753db3
+
   # TODO: build without gui
   - name: mkvtoolnix
     buildsystem: simple
@@ -62,12 +81,33 @@ modules:
         --prefix=/app
         --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
         --disable-update-check
-      - rake
-      - rake install
+      - GEM_HOME=/app/gems /app/gems/bin/drake -j $FLATPAK_BUILDER_N_JOBS
+      - GEM_HOME=/app/gems /app/gems/bin/drake install
+      - mkdir -p /app/share/doc/mkvtoolnix
+      - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-64.0.0.tar.xz
-        sha256: 843ea623f21ae2407f8f42839c41a22abf116bdd509e87d875bdc737703ab953
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-65.0.0.tar.xz
+        sha256: 0dddc9cc1bae26ceaac3a184482c50e6bb8add2d62e06ef08b55f9f0108bb92e
+
+  - name: mkvtoolnix-wrapper
+    buildsystem: simple
+    build-commands:
+      - install -m0755 entrypoint.sh /app/bin/mkvtoolnix
+    sources:
+      - type: file
+        url: https://raw.githubusercontent.com/flathub/org.bunkus.mkvtoolnix-gui/master/entrypoint.sh
+        sha256: 4f98f467b575bb5ed444f64b821e4cadc8a585864545a25dcdd5927e702e35db
+
+  - name: cmark-docs
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/share/doc/cmark
+      - install -m0644 -t/app/share/doc/cmark COPYING README.md
+    sources:
+      - type: archive
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-65.0.0.tar.xz
+        sha256: 0dddc9cc1bae26ceaac3a184482c50e6bb8add2d62e06ef08b55f9f0108bb92e
 
   - name: gMKVExtractGUI
     buildsystem: simple
