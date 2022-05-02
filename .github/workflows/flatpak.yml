@@ -1,0 +1,24 @@
+name: 📦 Build Flatpak
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  flatpak:
+    name: build-flatpak
+    runs-on: ubuntu-latest
+    container:
+      image: bilelmoussaoui/flatpak-github-actions:kde-6.2
+      options: --privileged
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build Flatpak
+        uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
+        with:
+          bundle:  net.sourceforge.gMKVExtractGUI.flatpak
+          manifest-path: net.sourceforge.gMKVExtractGUI.yml
+          cache-key: flatpak-builder-${{ github.sha }}
+
