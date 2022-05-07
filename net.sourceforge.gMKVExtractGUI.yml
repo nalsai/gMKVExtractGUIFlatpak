@@ -44,9 +44,19 @@ modules:
       - type: file
         url: https://rubygems.org/downloads/comp_tree-1.1.3.gem
         sha256: a9260f397f42e36de62764a8fe7e68bdbbcc75674d0419e831f633d6dda44936
+        x-checker-data:
+          type: anitya
+          project-id: 4687
+          stable-only: true
+          url-template: https://rubygems.org/downloads/comp_tree-$version.gem
       - type: file
         url: https://rubygems.org/downloads/drake-0.9.2.0.3.1.gem
         sha256: 4f7983a69720d6cc3427a137b31b0737b63033d96d80d8dbb4ad360e75abf325
+        x-checker-data:
+          type: anitya
+          project-id: 4649
+          stable-only: true
+          url-template: https://rubygems.org/downloads/drake-$version.gem
 
   - name: boost
     buildsystem: simple
@@ -55,8 +65,13 @@ modules:
       - cp -R boost /app/include
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
-        sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.bz2
+        sha256: 475d589d51a7f8b3ba2ba4eda022b170e562ca3b760ee922c146b6c65856ef39
+        x-checker-data:
+          type: anitya
+          project-id: 6845
+          stable-only: true
+          url-template: https://boostorg.jfrog.io/artifactory/main/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
 
   - name: cmark
     buildsystem: cmake-ninja
@@ -70,6 +85,11 @@ modules:
       - type: archive
         url: https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
         sha256: 6c7d2bcaea1433d977d8fed0b55b71c9d045a7cdf616e3cd2dce9007da753db3
+        x-checker-data:
+          type: anitya
+          project-id: 9159
+          stable-only: true
+          url-template: https://github.com/commonmark/cmark/archive/refs/tags/$version.tar.gz
 
   # TODO: build without gui
   - name: mkvtoolnix
@@ -87,8 +107,13 @@ modules:
       - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-66.0.0.tar.xz
-        sha256: 73a3f6c39b3580f28233f93555d282d07d5f51a8bbeb8b0bee09b820de80692c
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-67.0.0.tar.xz
+        sha256: db68be91ee8a0b688d924cc00d3bac9349306d54c29ce44a555728c1abb7d3ec
+        x-checker-data:
+          type: anitya
+          project-id: 1991
+          stable-only: true
+          url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
 
   - name: mkvtoolnix-wrapper
     buildsystem: simple
@@ -106,8 +131,13 @@ modules:
       - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-66.0.0.tar.xz
-        sha256: 73a3f6c39b3580f28233f93555d282d07d5f51a8bbeb8b0bee09b820de80692c
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-67.0.0.tar.xz
+        sha256: db68be91ee8a0b688d924cc00d3bac9349306d54c29ce44a555728c1abb7d3ec
+        x-checker-data:
+          type: anitya
+          project-id: 1991
+          stable-only: true
+          url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
 
   - name: gMKVExtractGUI
     buildsystem: simple
