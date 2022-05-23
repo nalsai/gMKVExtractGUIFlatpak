@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>net.sourceforge.gMKVExtractGUI</id>
   <metadata_license>CC0-1.0</metadata_license>
-	<project_license>Proprietary</project_license>
+  <project_license>Proprietary</project_license>
   <name>gMKVExtractGUI</name>
   <summary>A small GUI utility to use mkvinfo and mkvextract cli tools from MKVToolnix pack, in order to extract tracks, chapters and CUE sheets from mkv files.</summary>
   <description>
@@ -17,7 +17,50 @@
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release version="68.0.0" date="2022-05-22"/>
-    <release version="2.6.1" date="2021-03-05"/>
+    <release version="2.6.2" date="2022-04-09">
+      <description>
+        <ul>
+          <li>
+            Fix attachment filename for all cases. (Thanks mastrboy!)
+          </li>
+          <li>
+            Improve track selection when filter value is an empty string
+          </li>
+          <li>
+            Optimize algo to avoid unnecessary comparisons
+          </li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.6.1" date="2022-03-05">
+      <description>
+        <ul>
+          <li>
+            Replace invalid file characters with underscore character ('_') from output filename
+          </li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.6.0" date="2022-01-09">
+      <description>
+        <ul>
+          <li>
+            Add support for new element "Language IETF"
+          </li>
+          <li>
+            Minor code optimizations/modernization
+          </li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.5.2" date="2020-01-26">
+      <description>
+        <ul>
+          <li>
+            Fix issue in checking for an existing job when adding a new job
+          </li>
+        </ul>
+      </description>
+    </release>
   </releases>
 </component>
