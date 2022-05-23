@@ -15,8 +15,9 @@
   </screenshots>
   <url type="homepage">https://forum.doom9.org/showthread.php?t=170249</url>
   <developer_name>gpower2</developer_name>
-  <content_rating type="oars-1.1" />
+  <content_rating type="oars-1.1"/>
   <releases>
+    <release version="68.0.0" date="2022-05-22"/>
     <release version="2.6.1" date="2021-03-05"/>
   </releases>
 </component>
