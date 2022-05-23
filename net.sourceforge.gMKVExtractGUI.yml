@@ -1,6 +1,6 @@
 app-id: net.sourceforge.gMKVExtractGUI
 runtime: org.kde.Platform  # KDE is needed for MKVToolNix
-runtime-version: "6.2"
+runtime-version: '6.2'
 sdk: org.kde.Sdk
 command: gMKVExtractGUI
 default-branch: stable
@@ -8,7 +8,7 @@ add-extensions:
   org.freedesktop.Sdk.Extension.mono6:
     directory: lib/mono6
     add-ld-path: .
-    version: "21.08"
+    version: '21.08'
     autodownload: true
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/mono6
@@ -30,9 +30,9 @@ finish-args:
 modules:
   - name: libgdiplus
     sources:
-    - type: git
-      url: https://github.com/mono/libgdiplus
-      branch: "6.1"
+      - type: git
+        url: https://github.com/mono/libgdiplus
+        branch: '6.1'
 
   - name: drake
     buildsystem: simple
@@ -95,20 +95,17 @@ modules:
   - name: mkvtoolnix
     buildsystem: simple
     build-commands:
-      - ./configure
-        --enable-optimization
-        --enable-debug
-        --prefix=/app
-        --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
+      - ./configure --enable-optimization --enable-debug --prefix=/app --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
         --disable-update-check
       - GEM_HOME=/app/gems /app/gems/bin/drake -j $FLATPAK_BUILDER_N_JOBS
       - GEM_HOME=/app/gems /app/gems/bin/drake install
       - mkdir -p /app/share/doc/mkvtoolnix
-      - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING README.md
+      - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING
+        README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-67.0.0.tar.xz
-        sha256: db68be91ee8a0b688d924cc00d3bac9349306d54c29ce44a555728c1abb7d3ec
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-68.0.0.tar.xz
+        sha256: 9c29c61ef3496b18585c1e370bc7e121f7cfe1f8c35b851e7319a6b8325fd66f
         x-checker-data:
           type: anitya
           project-id: 1991
@@ -131,8 +128,8 @@ modules:
       - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-67.0.0.tar.xz
-        sha256: db68be91ee8a0b688d924cc00d3bac9349306d54c29ce44a555728c1abb7d3ec
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-68.0.0.tar.xz
+        sha256: 9c29c61ef3496b18585c1e370bc7e121f7cfe1f8c35b851e7319a6b8325fd66f
         x-checker-data:
           type: anitya
           project-id: 1991
