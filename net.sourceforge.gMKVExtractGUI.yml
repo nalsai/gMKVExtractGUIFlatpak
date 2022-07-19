@@ -32,7 +32,11 @@ modules:
     sources:
       - type: git
         url: https://github.com/mono/libgdiplus
-        branch: '6.1'
+        tag: '6.1'
+        commit: 44b44f92836f035e12b27c718e1f7bd42e369e28
+        x-checker-data:
+          type: git
+          tag-pattern: ^([\d.]+)$
 
   - name: drake
     buildsystem: simple
