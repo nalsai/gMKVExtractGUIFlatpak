@@ -14,7 +14,7 @@ Find out more about gMKVExtractGUI here: <https://forum.doom9.org/showthread.php
 I'm hosting this Flatpak on my own Flatpak Repo. You can install it from there like this:
 
 ```bash
-flatpak install https://flatpak.nils.moe/net.sourceforge.gMKVExtractGUI.flatpakref
+flatpak install https://flatpak.nils.moe/repo/appstream/net.sourceforge.gMKVExtractGUI.flatpakref
 ```
 
 You also need to install the mono6 extension for gMKVExtractGUI to work:
