@@ -10,7 +10,7 @@ jobs:
     name: build-flatpak
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-6.2
+      image: bilelmoussaoui/flatpak-github-actions:kde-6.3
       options: --privileged
     steps:
       - name: Checkout repository
@@ -21,4 +21,11 @@ jobs:
           bundle:  net.sourceforge.gMKVExtractGUI.flatpak
           manifest-path: net.sourceforge.gMKVExtractGUI.yml
           cache-key: flatpak-builder-${{ github.sha }}
+          branch: stable
+      - name: Deploy
+        uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
+        with:
+          repository: ""
+          flat-manager-url: https://flatpak.hachiman.nils.moe
+          token: ${{ secrets.FLATMAN_TOKEN }}
 
