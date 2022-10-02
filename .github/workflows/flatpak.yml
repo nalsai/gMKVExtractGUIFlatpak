@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+        with:
+          submodules: 'true'
       - name: Build Flatpak
         uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v4
         with:
