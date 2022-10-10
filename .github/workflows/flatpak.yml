@@ -25,6 +25,7 @@ jobs:
           cache-key: flatpak-builder-${{ github.sha }}
           branch: stable
       - name: Deploy
+        if: github.event_name != 'pull_request'
         uses: bilelmoussaoui/flatpak-github-actions/flat-manager@v3
         with:
           repository: ""
