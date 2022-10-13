@@ -158,6 +158,12 @@ modules:
     sources:
       - type: archive
         path: gMKVExtractGUI.v2.6.3.tar.xz
+        x-checker-data:
+          type: html
+          url: http://sourceforge.net/projects/gmkvextractgui/files/latest/download
+          version-pattern: gMKVExtractGUI.v([\\d\\.-]+).7z
+          url-pattern: https://sourceforge.net/projects/gmkvextractgui/files/v([\\d\\.-]+)/gMKVExtractGUI.v([\\d\\.-]+).7z/download
+
       - type: script
         dest-filename: launch.sh
         commands:
