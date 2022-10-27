@@ -1,6 +1,6 @@
 app-id: net.sourceforge.gMKVExtractGUI
 runtime: org.kde.Platform  # KDE is needed for MKVToolNix
-runtime-version: '6.3'
+runtime-version: '6.4'
 sdk: org.kde.Sdk
 command: gMKVExtractGUI
 default-branch: stable
@@ -8,7 +8,7 @@ add-extensions:
   org.freedesktop.Sdk.Extension.mono6:
     directory: lib/mono6
     add-ld-path: .
-    version: '21.08'
+    version: '22.08'
     autodownload: true
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/mono6
@@ -28,7 +28,80 @@ finish-args:
   - --device=dri
   - --filesystem=home
 modules:
+  - name: mkvtoolnix
+    buildsystem: simple
+    build-commands:
+      - ./configure --prefix=/app --enable-optimization --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets --disable-update-check
+      - GEM_HOME=/app/gems /app/gems/bin/drake -j $FLATPAK_BUILDER_N_JOBS
+      - GEM_HOME=/app/gems /app/gems/bin/drake install
+      - install -Dm644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING README.md
+    sources:
+      - type: archive
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-71.1.0.tar.xz
+        sha256: 153443e583c29ca9016879dc558503b426494c47934ef8a32265adcb52cfca47
+        x-checker-data:
+          type: anitya
+          project-id: 1991
+          stable-only: true
+          url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
+    modules:
+      - name: drake
+        buildsystem: simple
+        build-commands:
+          - mkdir /app/gems
+          - GEM_HOME=/app/gems gem install comp_tree-1.1.3.gem
+          - GEM_HOME=/app/gems gem install drake-0.9.2.0.3.1.gem
+        sources:
+          - type: file
+            url: https://rubygems.org/downloads/comp_tree-1.1.3.gem
+            sha256: a9260f397f42e36de62764a8fe7e68bdbbcc75674d0419e831f633d6dda44936
+            x-checker-data:
+              type: anitya
+              project-id: 4687
+              stable-only: true
+              url-template: https://rubygems.org/downloads/comp_tree-$version.gem
+          - type: file
+            url: https://rubygems.org/downloads/drake-0.9.2.0.3.1.gem
+            sha256: 4f7983a69720d6cc3427a137b31b0737b63033d96d80d8dbb4ad360e75abf325
+            x-checker-data:
+              type: anitya
+              project-id: 4649
+              stable-only: true
+              url-template: https://rubygems.org/downloads/drake-$version.gem
+      - name: boost
+        buildsystem: simple
+        build-commands:
+          - mkdir -p /app/include
+          - mv boost /app/include
+        sources:
+          - type: archive
+            url: https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.bz2
+            sha256: 1e19565d82e43bc59209a168f5ac899d3ba471d55c7610c677d4ccf2c9c500c0
+            x-checker-data:
+              type: anitya
+              project-id: 6845
+              stable-only: true
+              url-template: https://boostorg.jfrog.io/artifactory/main/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
+      - name: cmark
+        buildsystem: cmake-ninja
+        builddir: true
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DCMARK_STATIC=OFF
+        cleanup:
+          - /bin
+        sources:
+          - type: archive
+            url: https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
+            sha256: 6c7d2bcaea1433d977d8fed0b55b71c9d045a7cdf616e3cd2dce9007da753db3
+            x-checker-data:
+              type: anitya
+              project-id: 9159
+              stable-only: true
+              url-template: https://github.com/commonmark/cmark/archive/refs/tags/$version.tar.gz
+
   - shared-modules/gtk2/gtk2.json
+
   - name: libgdiplus
     sources:
       - type: git
@@ -39,120 +112,14 @@ modules:
           type: git
           tag-pattern: ^([\d.]+)$
 
-  - name: drake
-    buildsystem: simple
-    build-commands:
-      - mkdir /app/gems
-      - GEM_HOME=/app/gems gem install comp_tree-1.1.3.gem
-      - GEM_HOME=/app/gems gem install drake-0.9.2.0.3.1.gem
-    sources:
-      - type: file
-        url: https://rubygems.org/downloads/comp_tree-1.1.3.gem
-        sha256: a9260f397f42e36de62764a8fe7e68bdbbcc75674d0419e831f633d6dda44936
-        x-checker-data:
-          type: anitya
-          project-id: 4687
-          stable-only: true
-          url-template: https://rubygems.org/downloads/comp_tree-$version.gem
-      - type: file
-        url: https://rubygems.org/downloads/drake-0.9.2.0.3.1.gem
-        sha256: 4f7983a69720d6cc3427a137b31b0737b63033d96d80d8dbb4ad360e75abf325
-        x-checker-data:
-          type: anitya
-          project-id: 4649
-          stable-only: true
-          url-template: https://rubygems.org/downloads/drake-$version.gem
-
-  - name: boost
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/include
-      - cp -R boost /app/include
-    sources:
-      - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.bz2
-        sha256: 1e19565d82e43bc59209a168f5ac899d3ba471d55c7610c677d4ccf2c9c500c0
-        x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          url-template: https://boostorg.jfrog.io/artifactory/main/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
-
-  - name: cmark
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMARK_STATIC=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/commonmark/cmark/archive/refs/tags/0.30.2.tar.gz
-        sha256: 6c7d2bcaea1433d977d8fed0b55b71c9d045a7cdf616e3cd2dce9007da753db3
-        x-checker-data:
-          type: anitya
-          project-id: 9159
-          stable-only: true
-          url-template: https://github.com/commonmark/cmark/archive/refs/tags/$version.tar.gz
-
-  # TODO: build without gui
-  - name: mkvtoolnix
-    buildsystem: simple
-    build-commands:
-      - ./configure --enable-optimization --enable-debug --prefix=/app --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
-        --disable-update-check
-      - GEM_HOME=/app/gems /app/gems/bin/drake -j $FLATPAK_BUILDER_N_JOBS
-      - GEM_HOME=/app/gems /app/gems/bin/drake install
-      - mkdir -p /app/share/doc/mkvtoolnix
-      - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING
-        README.md
-    sources:
-      - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-71.1.0.tar.xz
-        sha256: 153443e583c29ca9016879dc558503b426494c47934ef8a32265adcb52cfca47
-        x-checker-data:
-          type: anitya
-          project-id: 1991
-          stable-only: true
-          url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
-
-  - name: mkvtoolnix-wrapper
-    buildsystem: simple
-    build-commands:
-      - install -m0755 entrypoint.sh /app/bin/mkvtoolnix
-    sources:
-      - type: file
-        url: https://raw.githubusercontent.com/flathub/org.bunkus.mkvtoolnix-gui/master/entrypoint.sh
-        sha256: 4f98f467b575bb5ed444f64b821e4cadc8a585864545a25dcdd5927e702e35db
-
-  - name: cmark-docs
-    buildsystem: simple
-    build-commands:
-      - mkdir -p /app/share/doc/cmark
-      - install -m0644 -t/app/share/doc/cmark COPYING README.md
-    sources:
-      - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-71.1.0.tar.xz
-        sha256: 153443e583c29ca9016879dc558503b426494c47934ef8a32265adcb52cfca47
-        x-checker-data:
-          type: anitya
-          project-id: 1991
-          stable-only: true
-          url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
-
   - name: gMKVExtractGUI
     buildsystem: simple
     build-commands:
-      - install -Dm755 gMKVExtractGUI.exe /app/gmkvextractgui/gMKVExtractGUI.exe
-      - install -Dm644 gMKVToolNix.dll /app/gmkvextractgui/gMKVToolNix.dll
-      - install -Dm644 Newtonsoft.Json.dll /app/gmkvextractgui/Newtonsoft.Json.dll
-      - ln -s "/app/bin/mkvextract" "/app/gmkvextractgui/mkvextract"
-      - ln -s "/app/bin/mkvinfo" "/app/gmkvextractgui/mkvinfo"
-      - ln -s "/app/bin/mkvmerge" "/app/gmkvextractgui/mkvmerge"
-      - ln -s "/app/bin/mkvpropedit" "/app/gmkvextractgui/mkvpropedit"
+      - install -Dm755 gMKVExtractGUI.exe -t /app/gmkvextractgui
+      - install -Dm644 gMKVToolNix.dll Newtonsoft.Json.dll -t /app/gmkvextractgui
+      - ln -s /app/bin/{mkvextract,mkvinfo,mkvmerge,mkvpropedit} /app/gmkvextractgui
       - install -Dm755 launch.sh /app/bin/gMKVExtractGUI
-      - install -Dm644 net.sourceforge.gMKVExtractGUI.appdata.xml /app/share/appdata/net.sourceforge.gMKVExtractGUI.appdata.xml
+      - install -Dm644 net.sourceforge.gMKVExtractGUI.metainfo.xml /app/share/appdata/net.sourceforge.gMKVExtractGUI.metainfo.xml
       - install -Dm644 net.sourceforge.gMKVExtractGUI.desktop /app/share/applications/net.sourceforge.gMKVExtractGUI.desktop
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
@@ -163,13 +130,12 @@ modules:
           url: http://sourceforge.net/projects/gmkvextractgui/files/latest/download
           version-pattern: gMKVExtractGUI.v([\\d\\.-]+).7z
           url-pattern: https://sourceforge.net/projects/gmkvextractgui/files/v([\\d\\.-]+)/gMKVExtractGUI.v([\\d\\.-]+).7z/download
-
       - type: script
         dest-filename: launch.sh
         commands:
           - /app/lib/mono6/bin/mono /app/gmkvextractgui/gMKVExtractGUI.exe "$@"
       - type: file
-        path: net.sourceforge.gMKVExtractGUI.appdata.xml
+        path: net.sourceforge.gMKVExtractGUI.metainfo.xml
       - type: file
         path: net.sourceforge.gMKVExtractGUI.desktop
       - type: file

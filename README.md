@@ -20,12 +20,12 @@ flatpak install https://flatpak.nils.moe/repo/appstream/net.sourceforge.gMKVExtr
 You also need to install the mono6 extension for gMKVExtractGUI to work:
 
 ```bash
-flatpak install flathub org.freedesktop.Sdk.Extension.mono6//21.08
+flatpak install flathub org.freedesktop.Sdk.Extension.mono6//22.08
 ```
 
 ## Building
 
 ```bash
-flatpak install flathub org.freedesktop.Sdk.Extension.mono6//21.08
+flatpak install flathub org.freedesktop.Sdk.Extension.mono6//22.08
 flatpak-builder --install-deps-from=flathub --force-clean build-dir net.sourceforge.gMKVExtractGUI.yml
 ```
