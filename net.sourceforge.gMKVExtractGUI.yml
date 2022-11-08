@@ -104,13 +104,14 @@ modules:
 
   - name: libgdiplus
     sources:
-      - type: git
-        url: https://github.com/mono/libgdiplus
-        tag: '6.1'
-        commit: 44b44f92836f035e12b27c718e1f7bd42e369e28
+      - type: archive
+        url: https://download.mono-project.com/sources/libgdiplus/libgdiplus-6.1.tar.gz
+        sha256: 97d5a83d6d6d8f96c27fb7626f4ae11d3b38bc88a1726b4466aeb91451f3255b
         x-checker-data:
-          type: git
-          tag-pattern: ^([\d.]+)$
+          type: anitya
+          project-id: 6440
+          stable-only: true
+          url-template: https://download.mono-project.com/sources/libgdiplus/libgdiplus-$version.tar.gz
 
   - name: gMKVExtractGUI
     buildsystem: simple
