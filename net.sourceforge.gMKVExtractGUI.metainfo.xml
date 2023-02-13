@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>net.sourceforge.gMKVExtractGUI</id>
   <metadata_license>CC0-1.0</metadata_license>
-  <project_license>Public Domain</project_license>
+  <project_license>Unlicense</project_license>
   <name>gMKVExtractGUI</name>
   <summary>A small GUI utility to use mkvinfo and mkvextract cli tools from MKVToolnix pack, in order to extract tracks, chapters and CUE sheets from mkv files.</summary>
   <description>
@@ -17,6 +17,18 @@
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="2.6.4" date="2023-01-29">
+      <description>
+        <ul>
+          <li>
+            Minor code optimizations
+          </li>
+          <li>
+            Add final Trim when generating the output filename (thanks tormento!)
+          </li>
+        </ul>
+      </description>
+    </release>
     <release version="2.6.3" date="2022-09-24">
       <description>
         <ul>

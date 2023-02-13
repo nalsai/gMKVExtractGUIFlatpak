@@ -13,12 +13,15 @@ add-extensions:
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/lib/mono6
 cleanup:
+  - /bin/cmark
+  - /gems
   - /include
   - /lib/cmake
   - /lib/pkgconfig
+  - /share/doc/libdvdcss/*.css
+  - /share/doc/libdvdcss/*.html
+  - /share/doc/libdvdcss/*.png
   - /share/man
-  - /bin/cmark
-  - /gems
   - '*.a'
   - '*.la'
 finish-args:
@@ -31,50 +34,34 @@ modules:
   - name: mkvtoolnix
     buildsystem: simple
     build-commands:
-      - ./configure --prefix=/app --enable-optimization --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
+      - ./configure
+        --enable-optimization
+        --enable-debug
+        --prefix=/app
+        --with-boost=/app
+        --with-docbook-xsl-root=/usr/share/xml/docbook/xml/xsl-stylesheets
         --disable-update-check
-      - GEM_HOME=/app/gems /app/gems/bin/drake -j $FLATPAK_BUILDER_N_JOBS
-      - GEM_HOME=/app/gems /app/gems/bin/drake install
-      - install -Dm644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING
-        README.md
+      - ./drake -j $FLATPAK_BUILDER_N_JOBS
+      - ./drake install
+      - mkdir -p /app/share/doc/mkvtoolnix
+      - install -m0644 -t/app/share/doc/mkvtoolnix AUTHORS CODE_OF_CONDUCT.md COPYING README.md
+      - mkdir -p /app/share/doc/cmark
+      - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-73.0.0.tar.xz
-        sha256: f31a129723571b46a974bc5d57d73733c1245ee429afd6ddaf274038e94e2280
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-74.0.0.tar.xz
+        sha256: b7dc8be6cb9170030de06b983f256ff3cb21efa3209f0efe8e079656fa3d5643
         x-checker-data:
           type: anitya
           project-id: 1991
           stable-only: true
           url-template: https://mkvtoolnix.download/sources/mkvtoolnix-$version.tar.xz
     modules:
-      - name: drake
-        buildsystem: simple
-        build-commands:
-          - mkdir /app/gems
-          - GEM_HOME=/app/gems gem install comp_tree-1.1.3.gem
-          - GEM_HOME=/app/gems gem install drake-0.9.2.0.3.1.gem
-        sources:
-          - type: file
-            url: https://rubygems.org/downloads/comp_tree-1.1.3.gem
-            sha256: a9260f397f42e36de62764a8fe7e68bdbbcc75674d0419e831f633d6dda44936
-            x-checker-data:
-              type: anitya
-              project-id: 4687
-              stable-only: true
-              url-template: https://rubygems.org/downloads/comp_tree-$version.gem
-          - type: file
-            url: https://rubygems.org/downloads/drake-0.9.2.0.3.1.gem
-            sha256: 4f7983a69720d6cc3427a137b31b0737b63033d96d80d8dbb4ad360e75abf325
-            x-checker-data:
-              type: anitya
-              project-id: 4649
-              stable-only: true
-              url-template: https://rubygems.org/downloads/drake-$version.gem
       - name: boost
         buildsystem: simple
         build-commands:
-          - mkdir -p /app/include
-          - mv boost /app/include
+          - ./bootstrap.sh --prefix=/app --with-libraries=filesystem,system
+          - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
         sources:
           - type: archive
             url: https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2
@@ -101,6 +88,26 @@ modules:
               project-id: 9159
               stable-only: true
               url-template: https://github.com/commonmark/cmark/archive/refs/tags/$version.tar.gz
+      - name: libdvdcss
+        sources:
+          - type: archive
+            url: https://download.videolan.org/pub/libdvdcss/1.4.3/libdvdcss-1.4.3.tar.bz2
+            sha256: 233cc92f5dc01c5d3a96f5b3582be7d5cee5a35a52d3a08158745d3d86070079
+            x-checker-data:
+              type: anitya
+              project-id: 5568
+              stable-only: true
+              url-template: https://download.videolan.org/pub/libdvdcss/$version/libdvdcss-$version.tar.bz2
+      - name: libdvdread
+        sources:
+          - type: archive
+            url: https://download.videolan.org/pub/videolan/libdvdread/6.1.3/libdvdread-6.1.3.tar.bz2
+            sha256: ce35454997a208cbe50e91232f0e73fb1ac3471965813a13b8730a8f18a15369
+            x-checker-data:
+              type: anitya
+              project-id: 5614
+              stable-only: true
+              url-template: https://download.videolan.org/pub/videolan/libdvdread/$version/libdvdread-$version.tar.bz2
 
   - shared-modules/gtk2/gtk2.json
 
@@ -122,12 +129,12 @@ modules:
       - install -Dm644 gMKVToolNix.dll Newtonsoft.Json.dll -t /app/gmkvextractgui
       - ln -s /app/bin/{mkvextract,mkvinfo,mkvmerge,mkvpropedit} /app/gmkvextractgui
       - install -Dm755 launch.sh /app/bin/gMKVExtractGUI
-      - install -Dm644 net.sourceforge.gMKVExtractGUI.metainfo.xml /app/share/appdata/net.sourceforge.gMKVExtractGUI.metainfo.xml
+      - install -Dm644 net.sourceforge.gMKVExtractGUI.metainfo.xml /app/share/metainfo/net.sourceforge.gMKVExtractGUI.metainfo.xml
       - install -Dm644 net.sourceforge.gMKVExtractGUI.desktop /app/share/applications/net.sourceforge.gMKVExtractGUI.desktop
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
       - type: archive
-        path: gMKVExtractGUI.v2.6.3.tar.xz
+        path: gMKVExtractGUI.v2.6.4.tar.xz
         x-checker-data:
           type: html
           url: http://sourceforge.net/projects/gmkvextractgui/files/latest/download
