@@ -1,6 +1,6 @@
 app-id: net.sourceforge.gMKVExtractGUI
 runtime: org.kde.Platform  # KDE is needed for MKVToolNix
-runtime-version: '6.4'
+runtime-version: '6.5'
 sdk: org.kde.Sdk
 command: gMKVExtractGUI
 default-branch: stable
