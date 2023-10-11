@@ -10,15 +10,15 @@ jobs:
     name: build-flatpak
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-6.4
+      image: bilelmoussaoui/flatpak-github-actions:kde-6.5
       options: --privileged
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: "true"
       - name: Build Flatpak
-        uses: flatpak/flatpak-github-actions/flatpak-builder@v4
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
           bundle: net.sourceforge.gMKVExtractGUI.flatpak
           manifest-path: net.sourceforge.gMKVExtractGUI.yml
@@ -26,7 +26,7 @@ jobs:
           branch: stable
       - name: Deploy
         if: github.event_name != 'pull_request'
-        uses: flatpak/flatpak-github-actions/flat-manager@v3
+        uses: flatpak/flatpak-github-actions/flat-manager@v4
         with:
           repository: ""
           flat-manager-url: https://flatpak.hachiman.nils.moe
