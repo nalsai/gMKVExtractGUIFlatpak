@@ -45,8 +45,8 @@ modules:
       - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-86.0.tar.xz
-        sha256: 29a9155fbba99f9074de2abcfbdc4e966ea38c16d9f6f547cf2d8d9a48152c97
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-87.0.tar.xz
+        sha256: 01cdfcbe01d9a771da4d475ed44d882a97695d08b6939684cebf56231bdee820
         x-checker-data:
           type: anitya
           project-id: 1991
