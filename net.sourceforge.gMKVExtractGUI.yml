@@ -60,13 +60,13 @@ modules:
           - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
         sources:
           - type: archive
-            url: https://boostorg.jfrog.io/artifactory/main/release/1.87.0/source/boost_1_87_0.tar.bz2
+            url: https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.bz2
             sha256: af57be25cb4c4f4b413ed692fe378affb4352ea50fbe294a11ef548f4d527d89
             x-checker-data:
               type: anitya
               project-id: 6845
               stable-only: true
-              url-template: https://boostorg.jfrog.io/artifactory/main/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
+              url-template: https://archives.boost.io/release/$major.$minor.$patch/source/boost_${major}_${minor}_$patch.tar.bz2
       - name: cmark
         buildsystem: cmake-ninja
         builddir: true
@@ -130,12 +130,7 @@ modules:
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
       - type: archive
-        path: gMKVExtractGUI.v2.6.4.tar.xz
-        x-checker-data:
-          type: html
-          url: http://sourceforge.net/projects/gmkvextractgui/files/latest/download
-          version-pattern: gMKVExtractGUI.v([\\d\\.-]+).7z
-          url-pattern: https://sourceforge.net/projects/gmkvextractgui/files/v([\\d\\.-]+)/gMKVExtractGUI.v([\\d\\.-]+).7z/download
+        path: gMKVExtractGUI.v2.8.0.tar.xz
       - type: script
         dest-filename: launch.sh
         commands:
