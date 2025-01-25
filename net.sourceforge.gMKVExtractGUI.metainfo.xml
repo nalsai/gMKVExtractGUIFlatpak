@@ -14,9 +14,32 @@
     </screenshot>
   </screenshots>
   <url type="homepage">https://forum.doom9.org/showthread.php?t=170249</url>
+  <url type="bugtracker">https://sourceforge.net/p/gmkvextractgui/tickets/</url>
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="2.8.0" date="2025-01-05">
+      <description>
+        <ul>
+          <li>
+            Add support for Dark Mode
+          </li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.7.0" date="2024-12-15">
+      <description>
+        <ul>
+          <li>Add explicit support for AV1 video codec</li>
+          <li>Add support for appending input files via drag and drop (thanks vertigo220!)</li>
+          <li>Make the success dialog popup appear as top most form across desktop (thanks vertigo220!)</li>
+          <li>Fix the Abort buttons state before the success dialog pop up appears (thanks vertigo220!)</li>
+          <li>Add new placeholder for directory separator in Options (thanks Liquid, oniiz86!)</li>
+          <li>Add new Status Strip in Options form in order to make resize easier</li>
+          <li>Add min size in the Options form to avoid minimizing it to size 1,1</li>
+        </ul>
+      </description>
+    </release>
     <release version="2.6.4" date="2023-01-29">
       <description>
         <ul>
