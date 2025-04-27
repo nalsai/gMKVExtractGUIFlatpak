@@ -45,8 +45,8 @@ modules:
       - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-91.0.tar.xz
-        sha256: 451320ee90a041cf85b42dbb4683316bf288d2382c54cdd8cd33b1e0258a3bb3
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-92.0.tar.xz
+        sha256: 657c1aa1c176510e57de12716492ca9d0b59ba5f17ace2f76ffe77c592c88929
         x-checker-data:
           type: anitya
           project-id: 1991
@@ -60,8 +60,8 @@ modules:
           - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
         sources:
           - type: archive
-            url: https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.bz2
-            sha256: af57be25cb4c4f4b413ed692fe378affb4352ea50fbe294a11ef548f4d527d89
+            url: https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.bz2
+            sha256: 46d9d2c06637b219270877c9e16155cbd015b6dc84349af064c088e9b5b12f7b
             x-checker-data:
               type: anitya
               project-id: 6845
