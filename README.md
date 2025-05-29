@@ -5,8 +5,6 @@
 gMKVExtractGUI is a small GUI utility to use mkvinfo and mkvextract cli tools from MKVToolnix pack, in order to extract tracks, chapters and CUE sheets from mkv files.  
 
 It runs on Linux using Mono.  
-The build from [SourceForge](https://sourceforge.net/projects/gmkvextractgui/files/) is included here as a .tar.xz file because flatpak-builder can't handle .7z files.
-
 Find out more about gMKVExtractGUI here: <https://forum.doom9.org/showthread.php?t=170249>
 
 ## Installing
