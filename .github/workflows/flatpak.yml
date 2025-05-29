@@ -10,7 +10,7 @@ jobs:
     name: build-flatpak
     runs-on: ubuntu-latest
     container:
-      image: bilelmoussaoui/flatpak-github-actions:kde-6.9
+      image: ghcr.io/flathub-infra/flatpak-github-actions:kde-6.9
       options: --privileged
     steps:
       - name: Checkout repository
@@ -26,7 +26,7 @@ jobs:
           branch: stable
       - name: Deploy
         if: github.event_name != 'pull_request'
-        uses: flatpak/flatpak-github-actions/flat-manager@v4
+        uses: flatpak/flatpak-github-actions/flat-manager@v6
         with:
           repository: ""
           flat-manager-url: https://flatpak.hachiman.nils.moe
