@@ -132,6 +132,11 @@ modules:
       - type: archive
         url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.9.0/gMKVExtractGUI.v2.9.0.7z
         sha256: b869cc2dd1681f46f67d2eabc46a1dc57fb70f68585dcf62a770a2d0f228d4bb
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="gMKVExtractGUI." + $version + ".7z") | .browser_download_url
       - type: script
         dest-filename: launch.sh
         commands:
