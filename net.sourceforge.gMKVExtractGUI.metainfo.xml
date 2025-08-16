@@ -18,11 +18,75 @@
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release version="v2.11.0" date="2025-08-01">
-      <description></description>
+    <release version="v2.11.1" date="2025-08-16">
+      <description>
+        <ul>
+          <li>fix: Fix issue with Job manager when adding tracks that don't have CodecPrivate data, like PGS subs. thanks arestarh</li>
+        </ul>
+      </description>
     </release>
-    <release version="v2.10.0" date="2025-06-18">
-      <description/>
+    <release version="2.11.0" date="2025-08-01">
+      <description>
+        <ul>
+          <li>feat: Add tooltips and an option to disable/enable them. Closes #21 (#24)</li>
+          <li>feat: Support checking/unchecking all Forced tracks per track type.</li>
+          <li>feat: Add support for the Forced track property. Closes #20</li>
+          <li>feat: Add option for overwriting existing files when extracting. This closes #18 (#19)</li>
+          <li>feat(tags): Add output filename options for tags. Closes #12</li>
+          <li>feat: Changed the output file extension for the OGM chapter type from "ogm.txt" to "txt" in the gMKVToolNix.MkvExtract namespace. Closes #4</li>
+          <li>fix(linux): Fix some more possible Linux issues with P/Invoke</li>
+          <li>fix(linux): correctly fix gRichTextBox issue in Linux</li>
+          <li>fix(linux): Fix some issues in Linux by excluding paths with P/Invoke</li>
+          <li>docs: Enhance README and add docs folder with a basic User Manual</li>
+          <li>tests: Introduce Unit Tests and refactor part of the code for testability and performance (#11)</li>
+          <li>perf: Improve context menu creation</li>
+          <li>perf: Core refactor</li>
+          <li>Huge refactor of parsing state, practically making parsing stateless</li>
+          <li>Refactored the process output handling, by using List instead of StringBuilder to avoid splitting into individual line strings afterwards</li>
+          <li>Removed file existence checks for batch requests to minimize the IO operations</li>
+          <li>Various code optimizations in string operations</li>
+          <li>Various code formatting improvements</li>
+          <li>Refactor gMKVMerge, option handling and codec private data logic (#15)</li>
+          <li>Refactor gMKVInfo, fix typos and improve parsing (#14)</li>
+          <li>Refactor gMKVExtract and related components (#13)</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.10.0" date="2025-06-18">
+      <description>
+        <ul>
+          <li>fix(ui): Show "Extraction completed!" message in the segment info text box instead of the label status, to avoid visual clatter (thanks @dclxvplusone)</li>
+          <li>feat(chapters): Add new PBF chapter type. It automatically transforms the default XML chapter type to the PBF chapter type. Comes with no guarantees, since documentation is basically non-existent</li>
+          <li>Reorganize and refactor various parts of the code. Switch to using Newtonsoft.Json via Nuget and update to latest version</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.9.1" date="2025-05-31">
+      <description>
+        <ul>
+          <li>fix(init): Revamped the init sequence for detecting the MKVToolnix path and added a new button to manually trigger the auto detect sequence</li>
+          <li>fix(logs): Fix various logs in FrmMain2 and gMKVHelper</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.9.0" date="2025-05-26">
+      <description>
+        <ul>
+          <li>fix(progress): Update the task bar progress bar value based on the total progress and not on the individual job progress</li>
+          <li>fix(code): Switch to unboxed types and minor optimizations</li>
+          <li>fix(gForm): Add the form handle in the remaining message boxes in gForm</li>
+          <li>feat(dark): Implement Dark Mode in a new way with a bit of help from AI (thanks Jules!)</li>
+          <li>fix(files): Fix file structure</li>
+          <li>Create README.md</li>
+        </ul>
+      </description>
+    </release>
+    <release version="2.8.1" date="2025-05-24">
+      <description>
+        <ul>
+          <li>fix(dark): Possible fix of a bug with ComboBox in dark mode (thanks vertigo220!)</li>
+        </ul>
+      </description>
     </release>
     <release version="2.8.0" date="2025-01-05">
       <description>

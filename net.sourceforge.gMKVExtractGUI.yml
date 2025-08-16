@@ -130,8 +130,8 @@ modules:
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
       - type: archive
-        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.11.0/gMKVExtractGUI.v2.11.0.7z
-        sha256: 3e53e36efa48ff0cf021322a056e85ad3853fd91ed0bb08ff03a921ed5c7e4f3
+        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.11.1/gMKVExtractGUI.v2.11.1.7z
+        sha256: 04e13f6567d1afe217a350b1aa108aeae6286a7b8f912ab8790396d0143e883f
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
