@@ -45,8 +45,8 @@ modules:
       - install -m0644 -t/app/share/doc/cmark COPYING README.md
     sources:
       - type: archive
-        url: https://mkvtoolnix.download/sources/mkvtoolnix-98.0.tar.xz
-        sha256: 1600f4a768ede6356e70785393f02f34dd54fbb5f661ffe6e7e8bc0f40229b79
+        url: https://mkvtoolnix.download/sources/mkvtoolnix-99.0.tar.xz
+        sha256: bcd99b49b0d18f0d7321fbbe36bbc7d2456dbfe707ba6ac3ce3f9e6bfcacaed6
         x-checker-data:
           type: anitya
           project-id: 1991
@@ -60,8 +60,8 @@ modules:
           - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
         sources:
           - type: archive
-            url: https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.bz2
-            sha256: 49551aff3b22cbc5c5a9ed3dbc92f0e23ea50a0f7325b0d198b705e8ee3fc305
+            url: https://archives.boost.io/release/1.91.0/source/boost_1_91_0.tar.bz2
+            sha256: de5e6b0e4913395c6bdfa90537febd9028ea4c0735d2cdb0cd9b45d5f51264f5
             x-checker-data:
               type: anitya
               project-id: 6845
@@ -130,8 +130,8 @@ modules:
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
       - type: archive
-        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.12.0/gMKVExtractGUI.v2.12.0.7z
-        sha256: 42135d1f8afa4316f1d6925e922e29f92e2cc8bdccef38cce8be30351a32af2f
+        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.14.0/gMKVExtractGUI.v2.14.0.7z
+        sha256: 6e429d44582c9618f3902c63e189a077555391221289f86b929dd114655ac4c8
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
