@@ -18,8 +18,47 @@
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="v2.14.0" date="2026-06-06">
+      <description>
+        <ul>
+          <li>chore(localization): refine Simplified Chinese translations by <a href="https://github.com/ambitiuswisdom">@ambitiuswisdom</a> in <a href="https://github.com/Gpower2/gMKVExtractGUI/pull/46">#46</a></li>
+          <li>fix: Add guard to ApplyResponsiveLayout for early resize safety. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/51">#51</a></li>
+          <li>fix: Fix translation grid cell commit logic in order to avoid overwriting the whole translation text per key stroke. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/45">#45</a></li>
+          <li>fix: Fix HighDPI mode for Windows by querying during start up and selecting the best mode available for the current Windows version. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/36">#36</a></li>
+        </ul>
+      </description>
+    </release>
+    <release version="v2.13.0" date="2026-04-25">
+      <description>
+        <ul>
+          <li>feat: Add localization feature (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/39">#39</a>)</li>
+          <li>perf: Use typed synchronous extraction delegates in gMKVJob and gMKVExtract</li>
+          <li>perf: Remove DoEvents from SetTableLayoutMainStatus methods in main Form</li>
+          <li>perf: Replace task polling with continuation-based TPL in main Form</li>
+          <li>perf: Replace thread polling with event-driven extraction completion</li>
+          <li>perf: Send async events for updating the progress and status fields in the forms</li>
+          <li>fix(dark): Fix scrollbars in dark mode for RichTextBox</li>
+          <li>fix(dark): Fix buttons light mode theming when switching from dark to light mode during runtime</li>
+          <li>fix(dark): Fix status strip in dark mode for Mono runtime</li>
+          <li>fix: Fix gform DPI autoscaling and force initial DPI scaling on Mono in gForm.InitDPI. References issues <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/36">#36</a> <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/41">#41</a> (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/42">#42</a>)</li>
+          <li>chore: Sanitize all files with the same line endings (CRLF) and encoding (UTF-8 without BOM) for consistency</li>
+          <li>chore: Fix public API of gMKVToolnix sevices</li>
+        </ul>
+      </description>
+    </release>
     <release version="v2.12.0" date="2026-01-05">
-      <description></description>
+      <description>
+        <ul>
+          <li>doc: Update the user manual with the new Advanced Options</li>
+          <li>fix: The Defaults button in Options form now resets the new Advanced Options too</li>
+          <li>feat: Add support for raw and fullraw track extraction modes. Closes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/22">#22</a> (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/33">#33</a>)</li>
+          <li>feat: Add option to disable BOM for text files (v96.0+) <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/31">#31</a> (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/32">#32</a>)</li>
+          <li>fix: Fix key overrides of custom TextBox controls for Ctrl+A and Ctrl+C</li>
+          <li>fix: Changed txtLog to gRichTextBox and removed unused code</li>
+          <li>feat: Add a Select button that displays the Context Menu as another entry point for it. <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/27">#27</a> (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/30">#30</a>)</li>
+          <li>fix: fix MkvToolnixPath detection when Settings path is empty (<a href="https://github.com/Gpower2/gMKVExtractGUI/pull/29">#29</a>) Thanks <a href="https://github.com/lapluis">@lapluis</a></li>
+        </ul>
+      </description>
     </release>
     <release version="v2.11.1" date="2025-08-16">
       <description>
