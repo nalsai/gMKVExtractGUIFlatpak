@@ -18,6 +18,16 @@
   <developer_name>gpower2</developer_name>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release version="v2.15.0" date="2026-07-11">
+      <description>
+        <ul>
+          <li>chore(localization): refine Simplified Chinese translations by <a href="https://github.com/ambitiuswisdom">@ambitiuswisdom</a> in <a href="https://github.com/Gpower2/gMKVExtractGUI/pull/46">#46</a></li>
+          <li>fix: Add guard to ApplyResponsiveLayout for early resize safety. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/51">#51</a></li>
+          <li>fix: Fix translation grid cell commit logic in order to avoid overwriting the whole translation text per key stroke. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/45">#45</a></li>
+          <li>fix: Fix HighDPI mode for Windows by querying during start up and selecting the best mode available for the current Windows version. Fixes <a href="https://github.com/Gpower2/gMKVExtractGUI/issues/36">#36</a></li>
+        </ul>
+      </description>
+    </release>
     <release version="v2.14.0" date="2026-06-06">
       <description>
         <ul>
