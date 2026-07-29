@@ -123,6 +123,7 @@ modules:
     build-commands:
       - install -Dm755 gMKVExtractGUI.exe -t /app/gmkvextractgui
       - install -Dm644 gMKVToolNix.dll Newtonsoft.Json.dll -t /app/gmkvextractgui
+      - install -Dm644 gmkvextract-*.json -t /app/gmkvextractgui
       - ln -s /app/bin/{mkvextract,mkvinfo,mkvmerge,mkvpropedit} /app/gmkvextractgui
       - install -Dm755 launch.sh /app/bin/gMKVExtractGUI
       - install -Dm644 net.sourceforge.gMKVExtractGUI.metainfo.xml /app/share/metainfo/net.sourceforge.gMKVExtractGUI.metainfo.xml
@@ -130,13 +131,22 @@ modules:
       - install -Dm644 net.sourceforge.gMKVExtractGUI.png /app/share/icons/hicolor/256x256/apps/net.sourceforge.gMKVExtractGUI.png
     sources:
       - type: archive
-        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.15.0/gMKVExtractGUI.v2.15.0.7z
-        sha256: 00da9bf0c40e0afab111680288bd868917aa26462063bc4d5fde75b915ad6e24
+        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.15.0/gMKVExtractGUI.v2.15.0.zip
+        sha256: 1e032be3652b288ebf339d1760faeb9780cfe2d8e4d3bedfa88ee4b8e4012233
         x-checker-data:
           type: json
           url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name=="gMKVExtractGUI." + $version + ".7z")
+          url-query: .assets[] | select(.name=="gMKVExtractGUI." + $version + ".zip")
+            | .browser_download_url
+      - type: archive
+        url: https://github.com/Gpower2/gMKVExtractGUI/releases/download/v2.15.0/gMKVExtractGUI.locales.v2.15.0.zip
+        sha256: 7ee9966f315e87a925d1ca6deb535c53c4ca98f8e3fe4c521e96e326b6a19952
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
+          version-query: .tag_name
+          url-query: .assets[] | select(.name=="gMKVExtractGUI.locales." + $version + ".zip")
             | .browser_download_url
       - type: script
         dest-filename: launch.sh
