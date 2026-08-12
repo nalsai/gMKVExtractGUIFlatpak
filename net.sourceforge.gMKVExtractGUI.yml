@@ -60,8 +60,8 @@ modules:
           - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
         sources:
           - type: archive
-            url: https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.bz2
-            sha256: 49551aff3b22cbc5c5a9ed3dbc92f0e23ea50a0f7325b0d198b705e8ee3fc305
+            url: https://archives.boost.io/release/1.92.0/source/boost_1_92_0.tar.bz2
+            sha256: 5c1d40cb8e19adbf740a4ec2da35b3e58f3f5804b1dce44deb53df72193cbc6c
             x-checker-data:
               type: anitya
               project-id: 6845
@@ -146,8 +146,8 @@ modules:
           type: json
           url: https://api.github.com/repos/Gpower2/gMKVExtractGUI/releases/latest
           version-query: .tag_name
-          url-query: .assets[] | select(.name=="gMKVExtractGUI.locales." + $version + ".zip")
-            | .browser_download_url
+          url-query: .assets[] | select(.name=="gMKVExtractGUI.locales." + $version
+            + ".zip") | .browser_download_url
       - type: script
         dest-filename: launch.sh
         commands:
